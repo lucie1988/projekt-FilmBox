@@ -1,4 +1,18 @@
 const filmy = [
+
+	{
+		id: 'forest-gump',
+		nazev: 'Forest Gump',
+		plakat: {
+			url: 'https://image.tmdb.org/t/p/original/vIEr3cJjNFQxSOANiHsjGglp5NX.jpg',
+			sirka: 420,
+			vyska: 593,
+		},
+		ochutnavka: 'Kultovní americký film.',
+		popis:
+			'Poněkud prostoduchý Forrest Gump, vyzbrojen užitečnými radami své matky, se vydává na pouť životem, který mu připraví nejedno překvapení.',
+		premiera: '1994-06-23',
+	},
 	{
 		id: 'pelisky',
 		nazev: 'Pelíšky',
@@ -104,3 +118,25 @@ const filmy = [
 		premiera: '2022-12-24',
 	},
 ]
+
+
+const seznamFilmu = document.querySelector("#seznam-filmu")
+
+filmy.forEach((film) => {
+	seznamFilmu.innerHTML += `
+	<div class="col">
+	<div class="card">
+  	 <img
+		src=${film.plakat.url}
+		width=${film.plakat.sirka}
+		height=${film.plakat.vyska}
+		class="card-img-top"
+		alt="plakát"
+  	 />
+   <div class="card-body">
+	  <h5 class="card-title">${film.nazev}</h5>
+	  <p class="card-text">${film.ochutnavka}</p>
+	  <a href="film.html#${film.id}" class="btn btn-primary">Přehrát</a>
+   	</div>
+	`
+})

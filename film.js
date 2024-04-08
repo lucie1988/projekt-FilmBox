@@ -1,5 +1,18 @@
 const filmy = [
 	{
+		id: 'forest-gump',
+		nazev: 'Forest Gump',
+		plakat: {
+			url: 'https://image.tmdb.org/t/p/original/vIEr3cJjNFQxSOANiHsjGglp5NX.jpg',
+			sirka: 420,
+			vyska: 593,
+		},
+		ochutnavka: 'Kultovní americký film.',
+		popis:
+			'Poněkud prostoduchý Forrest Gump, vyzbrojen užitečnými radami své matky, se vydává na pouť životem, který mu připraví nejedno překvapení.',
+		premiera: '1994-06-23',
+	},
+	{
 		id: 'pelisky',
 		nazev: 'Pelíšky',
 		plakat: {
@@ -104,3 +117,49 @@ const filmy = [
 		premiera: '2022-12-24',
 	},
 ]
+
+const detailFilmu = document.querySelector('#detail-filmu')
+if (detailFilmu) {
+  const idFilmu = location.hash.substring(1)
+  let film
+  filmy.forEach((porovnavanyFilm) => {
+    if (porovnavanyFilm.id === idFilmu) {
+      film = porovnavanyFilm
+    }
+  })
+  detailFilmu.querySelector('.card-title').textContent = film.nazev
+  detailFilmu.querySelector('.card-text').textContent = film.popis
+  const plakat = detailFilmu.querySelector('.img-fluid')
+  plakat.height = film.plakat.vyska
+  plakat.width = film.plakat.sirka
+  plakat.src = film.plakat.url
+}
+
+
+
+
+const form = document.querySelector('#note-form')
+
+const checkbox = document.querySelector('#terms-checkbox')
+
+const message = document.querySelector('#message-input')
+
+if (form) {
+	form.addEventListener('submit', (event) => {
+	if (message.value === '') {
+		message.classList.add('is-invalid')
+		message.focus()
+	} else {
+		message.classList.remove('is-invalid')
+		if (checkbox.checked === false) {
+			checkbox.classList.add('is-invalid')
+			checkbox.focus()
+		} else {
+			checkbox.classList.remove('is-invalid')
+			form.innerHTML = `<p class="card-text">${message.value}</p>`
+		}
+	}
+	
+		event.preventDefault()
+	})
+}
